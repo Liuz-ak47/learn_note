@@ -157,6 +157,37 @@ async function f1() {
 f1();
 ```
 
+#### 立即执行函数
+
+几种写法：
+
+```javascript
+1. 
+!function(){
+
+}()
+2.
+(function(){
+
+}())
+3.
+(function(){
+
+})()
+4.
+var main = function(){
+	return e.m = n, e(), a=n*n, a=n;
+}()
+
+return的语句若为逗号，那么这句话都会执行，并以最后那句a=n作为返回值
+```
+
+
+
+
+
+
+
 
 
 
