@@ -14,6 +14,22 @@ var Mock = require('mockjs')
 Mock.mock('http://123.207.32.32:8000/api/m3', {    //拦截这个特定url的请求
         'token|5-20': 'mockstring'
 })
+
+Mock.mock('http://123.207.32.32:8000/api/m3/login', 'post', function(o){
+    // 注意这里o是一个对象，o.body是一个字符串，是post请求传过来对象，'{"userName":"dsd","password":"ds"}'，要将其转化为对象才能获取userName
+    // console.log(obj.userName);  
+    const obj = JSON.parse(o.body)
+    if(Mock.mock({'boolean|1-2': true}).boolean&&obj.userName=='liuzhe'&&obj.password=='liuzhe'){
+        return{
+            status: 200,
+            data: {
+                token: 'tokenString'
+            },
+        }
+    } else {
+        console.log(1);
+    }
+})
 ```
 
 

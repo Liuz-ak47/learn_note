@@ -53,6 +53,8 @@ $route.fullPath :  全部的字符串
 
 可以在每个组件中使用this.$router访问这个全局对象
 
+**$router.currentPath 就是 $route**
+
 ##### push方法
 
 path和query更搭配，name和params更搭配。path带params时，要在path中写全。

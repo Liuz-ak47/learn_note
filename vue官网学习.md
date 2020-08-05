@@ -111,3 +111,24 @@
      doneCount: 'doneTodosCount'
    })
    ```
+
+7.  如果在vue组件中定义一个属性a，使用vuex中的state属性b来初始它的值，那么后续这两个值是互不影响的，即修改a state中的b不会变，mutations修改b，组件中a的值也不会变。
+
+   ```javascript
+   //vue组件
+   {
+   	data(){
+   		return{
+   			a: this.$store.state.b
+   		}
+   	}
+   }
+   ```
+
+
+decode？incode？
+
+在组件上使用v-model
+
+prop双向绑定?
+
