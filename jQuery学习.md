@@ -122,7 +122,7 @@ $("div").slideToggle(1000, function(){}) // jQ对象.slideToggle()是以滑动�
 
 ```javascript
 $("div").fadeIn()
-$("div").fadeOut()  //参数同上，可以加事件和回调函数
+$("div").fadeOut()  //参数同上，可以加时间和回调函数
 $("div").fadeToggle() //jQ对象以淡入淡出效果切换隐藏和显示
 $("div").fadeTo(1000, 0.5) //时间内切换透明度
 ```
@@ -178,7 +178,7 @@ $(".nav>li").mouseout(function(){})
 
    - 给一个元素绑定事件
 
-     ```
+     ```javascript
      $("div").on("click", function(){}) //相当于 $("div").click(function(){})
      ```
 
@@ -213,7 +213,7 @@ $(".nav>li").mouseout(function(){})
      	console.log($(this)[0]) //给ol绑定事件时，还没有li，但是click触发时，this指向的是li
      })								
      var li = $("<li>我是后来创建的元素<li>")
-     $("ol").append(li)
+     $("ol").prepend(li)
      ```
 
 4. 只能触发一次的事件

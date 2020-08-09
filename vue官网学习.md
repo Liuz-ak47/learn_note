@@ -63,7 +63,7 @@
           props: ['value'],
       }
         
-      双向绑定不一定是输入框，所以重点是父组件的data，传到自组件的prop中，再被动态属性绑定，决定显示
+      双向绑定不一定是输入框，所以重点是父组件的data，传到自组件的prop中，由子组件的model决定props接收的名称，比如单选复选框为checked等，并决定改变事件，如change等。
       
       ```
 
@@ -80,4 +80,64 @@
    简写如上
    ```
 
+
+6. Vuex的gettets和actions的辅助函数
+
+   ### `mapGetters` 辅助函数
+
+   `mapGetters` 辅助函数仅仅是将 store 中的 getter 映射到局部计算属性：
+
+   ```js
+   import { mapGetters } from 'vuex'
    
+   export default {
+     // ...
+     computed: {
+     // 使用对象展开运算符将 getter 混入 computed 对象中
+       ...mapGetters([
+         'doneTodosCount',   //vuex的store中的getters中的方法
+         'anotherGetter',
+         // ...
+       ])
+     }
+   }
+   ```
+
+   如果你想将一个 getter 属性另取一个名字，使用对象形式：
+
+   ```js
+   ...mapGetters({
+     // 把 `this.doneCount` 映射为 `this.$store.getters.doneTodosCount`
+     doneCount: 'doneTodosCount'
+   })
+   ```
+
+7.  如果在vue组件中定义一个属性a，使用vuex中的state属性b来初始它的值，那么后续这两个值是互不影响的，即修改a state中的b不会变，mutations修改b，组件中a的值也不会变，不管a、b是简单数据类型还是复杂数据类型。
+
+   ```javascript
+   //vue组件
+   {
+   	data(){
+   		return{
+   			a: this.$store.state.b
+   		}
+   	}
+   }
+   ```
+
+8. 关于父子组件传值，在子组件直接修改props的问题：
+
+   单项数据流的思想，数据只应该从父组件传到子组件，这应该是子组件props数据的唯一来源，每当父组件数据更新时，子组件的props会自动更新到最新。所以在子组件中，可以直接展示、应用props，但是应该避免直接修改props。当需要修改props中的数据时，可以在子组件的data中定义变量并用props数据初始化它，这样相当于用props数据把data数据初始化了，后续props和data数据是相互不影响的（这个的根本原因是因为vue中响应式是把data中数据的属性进行get和set跟踪，而props或任何其他非直接数据再给data数据初始化后，就和data数据脱离了关系）。注意computed对props数据进行转换时，当props数据改变，computed能够输出转换后的值，因为这就是computed的依赖嘛。如果想修改子组件props数据，父组件中原始数据也需要更改，应该使用vue推荐给我们的思想和方式，即.syc的方式。
+
+   其实父子组件传值，本质上就是将父组件的数据 复制给子组件的props，所以当直接修改子组件props时，如果传过来的props直接是简单数据，那么不会影响父组件；如果传过来的是对象这种引用数据类型，那么相当于把父组件数据的地址复制给了子组件props，此时修改props任何东西，都会改变父组件的值。
+
+   
+
+   ~~单项数据流的思想，数据只应该从父组件传到子组件，这应该是子组件props数据的唯一来源，每当父组件数据更新时，子组件的props会自动更新到最新。所以在子组件中，可以直接展示、应用props，但是应该避免直接修改props。当需要修改props中的数据类型时，可以在子组件的data或computed中定义变量并用props数据初始化它，由于js对于简单类型数据是变量值复制，所以再修改数据时不会影响props的数据(反过来同样，组件created后，prop简单数据变化后，不再影响子组件数据值)，也就不会影响父组件的原始数据，造成数据改变来源不明确的问题。如果需要修改子组件props中的复杂数据类型，而又不希望影响父组件中的原始数据，那么无论如何也是办不到的。如果想修改子组件props中的复杂数据类型，父组件中原始数据也需要更改，应该使用vue推荐给我们的思想和方式，即.syc的方式。~~
+
+decode？incode？
+
+在组件上使用v-model
+
+prop双向绑定?
+
