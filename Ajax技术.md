@@ -203,7 +203,7 @@ window.onload = function() {
     $city = $_GET["city"];
     $cbName = $_GET["callback"];    //$cbName就是foo2
     if($city == "beijing") {
-        echo $cbName."('北京的天气晴')";   //注意php语法使用.来连接字符串
+        echo $cbName."('北京的天气晴')";   //注意php语法使用.来连接字符串 执行了foo2('北京的天气晴')
     } else {
         echo $cbName."('未查询到该地区')";
     }
@@ -370,7 +370,7 @@ $.ajax({
 
 ##### jQuery封装的ajax：  形式上与上面两种一样，关键在于dataType的值是不是jsonp
 
-```
+```javascript
 $.ajax({
     url: "http://suggest.taobao.com/sug",
     data: {q: keyValue},   //根据接口文档确定参数键

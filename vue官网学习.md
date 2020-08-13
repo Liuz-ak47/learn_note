@@ -135,9 +135,108 @@
 
    ~~单项数据流的思想，数据只应该从父组件传到子组件，这应该是子组件props数据的唯一来源，每当父组件数据更新时，子组件的props会自动更新到最新。所以在子组件中，可以直接展示、应用props，但是应该避免直接修改props。当需要修改props中的数据类型时，可以在子组件的data或computed中定义变量并用props数据初始化它，由于js对于简单类型数据是变量值复制，所以再修改数据时不会影响props的数据(反过来同样，组件created后，prop简单数据变化后，不再影响子组件数据值)，也就不会影响父组件的原始数据，造成数据改变来源不明确的问题。如果需要修改子组件props中的复杂数据类型，而又不希望影响父组件中的原始数据，那么无论如何也是办不到的。如果想修改子组件props中的复杂数据类型，父组件中原始数据也需要更改，应该使用vue推荐给我们的思想和方式，即.syc的方式。~~
 
-decode？incode？
+#### 
 
-在组件上使用v-model
+9. 混入mixins
 
-prop双向绑定?
+   数据冲突：组件优先；
 
+   钩子函数冲突： 合并为数组，都会执行
+
+   值为对象的选项冲突，例如 `methods`、`components` 和 `directives`：对象合并，对象中键名冲突，组件优先
+
+```
+var mixin = { 	//定义混入对象
+	data: function() {
+		reurn{
+			a: 'a'
+		}
+	},
+	created: function(){
+		console.log()
+	},
+	methods: {
+		fn(){
+		
+		}
+	}
+}   
+
+new Vue({
+	mixins: [mixin]     //使用混入对象。   
+})
+```
+
+
+
+
+
+10. .sync 修饰符
+
+    作用:  父子组件传值，当子组件修改值，父组件的属性值同步修改
+
+    如：
+
+```
+// 父组件
+<exap-father :title.sync="doc.title"></exap-father>
+//子组件
+<exap-son>
+	props: {
+		title: ''
+	},
+	methods: {
+		sonMethods: function(){
+			this.$emit('update:title', newTile)
+		}
+	}
+</exap-son>
+```
+
+​	其实父组件是缩写：
+
+```
+<exap-father :title="doc.title" @update:title="doc.title = $event"></exap-father>
+```
+
+​	当父组件要传递到子组件的是一个含有很多属性的对象，我们可以这么写，已实现这个对象的父子同步修改：
+
+​	//对吗？还没试验
+
+```
+//父组件
+<exap-father v-bind.sync="doc">  
+	data(){
+		return{
+			doc: {   //doc是父组件的一个对象
+				prop1: 'v1',
+				prop2: 'v2'
+			}
+		}
+	}
+<exap-father>
+//子组件
+<exap-son >
+	props: {
+		doc: {}
+		//也可能是! 可能性大一些
+		// prop1: '',
+		// prop2: ''
+	},
+	methods: {
+		sonMethods1: function(){
+			this.$emit('update:doc.prop1', newV1)   //this.$emit('update:prop1', newV1)
+			this.$emit('update:doc.prop2', newV2)   //this.$emit('update:prop2', newV2)
+		}  
+	}
+</exap-son>
+```
+
+​	联想一下，父子组件传值，父组件传递一个对象的全部属性也差不多：
+
+```
+<exap-father v-bind="doc"> 
+```
+
+11. 
+12. 
