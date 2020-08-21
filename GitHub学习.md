@@ -132,6 +132,19 @@
    
    - git checkout develop origin/develop  把远程的 develop 分支迁到本地
    
-   - 
+
+
+
+# GitFlow学习与使用
+
+### 基于远程develop仓库新功能的开发
+
+1. 初始化git仓库： git init
+2. 初始化git flow仓库：git flow init
+3. 从远程develop拉最新分支到本地，并基于这个最新分支，在本地新建一个功能分支xxx：git flow feature start xxx
+4. 开发完功能后，将xxx分支合并到本地develop，并删除xxx分支，切换到develop：git flow featrue finish xxx
+5. 推送到远程develop仓库：git push origin develop
+
+
 
  
