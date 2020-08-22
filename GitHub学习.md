@@ -75,19 +75,30 @@
 
 1. 本地git命令
    - git status 查看状态
+   
    - git init (切换到仓库目录后)初始化仓库
+   
    - 工作区相关
+   
      - ctrl + s 保存修改，将文件保存到工作区。状态为modified
      - git restore <file> 撤销的另一种方式，与上面不同的是，这种方式是直接将你的修改撤销掉，而不是通过暂存区覆盖
      - git checkout <file>   撤销文件的修改(没有进暂存区的文件——未git add的))。本质是将暂存区的这个文件覆盖掉工作区的文件，就相当于撤销了工作区文件的修改。应用场景比如对文件修改了代码或者加了一些注释，但发现是没有用的，就可以使用这个命令
+   
    - 暂存区相关
+   
      - git add <file> 添加追踪文件到暂存区
      - git restore --staged <file> 取消添加文件到暂存区
-     - git reset HEAD <file> 使用本地仓库的文件状态覆盖暂存区这个文件的状态，也相当于撤销这个文件在暂存区的状态。但是在工作区还是保留修改的文件。
+     - git reset HEAD <file> 使用本地仓库的文件状态覆盖暂存区这个文件的状态。也相当于撤销这个文件在暂存区的状态。但是在工作区还是保留修改的文件。
+   
    - 本地仓库相关
+   
      - git commit -m '描述信息'   提交修改到本地仓库
-     - git reset HEAD~ 返回至上一次的modified状态(未add的、不针对某一个文件的)
-     - git log 查看所有commit提交信息
+     - git reset HEAD~ 使用本地仓库的文件上一次commit的状态覆盖暂存区，注意此时工作区仍是modified状态，即最新修改仍在工作区可视
+     - git reset + ID 使用本地仓库的文件在提交ID的那个状态，覆盖暂存区。注意只是修改了暂存区，如果想同时改变工作区，还应该使用git checkout + 文件名 覆盖工作区。或者，如果想直接使暂存区、工作区回滚到某一ID状态，直接使用 git reset --hard + ID 
+   
+     
+   
+     - git log 查看所有commit提交信息，以及ID
      - git branch 查看当前分支
      - git branch a  创建a分支。a分支与主分支一样的内容
      - git checkout a  切换到a分支上。*代表当前所在分支
