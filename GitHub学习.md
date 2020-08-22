@@ -142,20 +142,36 @@
 
      d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 
-   - git diff  比较当前文件和暂存区文件差异，什么是暂存区？就是你执行过 git add 的文件
+     
 
+   - git diff 比较工作区和暂存区差异，什么是暂存区？就是你执行过 git add 的文件
+
+   - git diff HEAD 比较工作区和当前仓库的差异
+
+   - git diff --cached [+ ID] 比较暂存区和仓库快照的差异
+
+   - git diff + ID 比较工作区和仓库ID提交的差异
+
+   - git diff ID1 ID2 比较两个历史仓库快照
+
+   - 
+
+   - git commit --amend  修改提交的记录信息 即-m的信息，不会产生新的提交
+   
+   - 
+   
    - git stash 是把当前分支所有没有 commit 的代码先隐藏起来，使用后查看git status是干净的没有未提交记录的，同时查看修改的文件也没有修改的记录
-
+   
    - git stash list 查看隐藏记录
-
+   
    - git stash apply  将隐藏的代码还原，这时git status就能看见有待提交代码，同时cat也能查看修改的代码
-
+   
    - git stash drop  删除本次隐藏记录。后面可以加ID删除特定隐藏记录
-
+   
    - git merge featureA 合并代码
-
+   
    - git rebase featureA 合并代码
-
+   
    - git push origin :develop  删除远程分支
    
    - git checkout develop origin/develop  把远程的 develop 分支迁到本地
