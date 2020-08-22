@@ -76,12 +76,13 @@
 1. 本地git命令
    - git status 查看状态
    - git init (切换到仓库目录后)初始化仓库
-   - git add <file> 添加追踪文件到暂存区
-   - git restore --staged <file> 取消文件到暂存区
+   - ctrl + s 保存修改，将文件保存到工作区。状态为modified
    - git checkout <file>   撤销没有进暂存区(未git add)的文件的修改（比如对文件修改了代码或者加了一些注释，但发现是没有用的，可以使用这个命令，将暂存区的这个文件覆盖掉工作区的文件，就相当于撤销了工作区文件的修改）
    - git restore <file> 撤销的另一种方式，与上面不同的是，这种方式是直接将你的修改撤销掉，而不是通过暂存区覆盖
+   - git add <file> 添加追踪文件到暂存区
+   - git restore --staged <file> 取消文件到暂存区
    - git commit -m '描述信息'   提交修改到本地仓库
-   -   git reset HEAD <file> 取消推送文件到本地仓库。但是在工作区还是保留修改的文件
+   -   git reset HEAD <file> 取消推送文件到本地仓库。但是在工作区还是保留修改的文件。*这个命令好像不太好用*
    - git log 查看所有commit提交信息
    - git branch 查看当前分支
    - git branch a  创建a分支。a分支与主分支一样的内容
