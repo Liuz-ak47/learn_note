@@ -86,6 +86,7 @@
      - git reset HEAD <file> 使用本地仓库的文件状态覆盖暂存区这个文件的状态，也相当于撤销这个文件在暂存区的状态。但是在工作区还是保留修改的文件。
    - 本地仓库相关
      - git commit -m '描述信息'   提交修改到本地仓库
+     - git reset HEAD~ 返回至上一次的modified状态(未add的、不针对某一个文件的)
      - git log 查看所有commit提交信息
      - git branch 查看当前分支
      - git branch a  创建a分支。a分支与主分支一样的内容
