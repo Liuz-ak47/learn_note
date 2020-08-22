@@ -49,8 +49,8 @@
 - 三个区域(树)：每个区git都会保存每一个文件的版本
 
   1. 工作区：看的见的文件，写代码的文件，新代码被记录为modified
-  2. 暂存区：执行过git add <文件名>的文件进入的区域、状态为staged，被tracked的文件，将要被commit到仓库的文件
-  3. 仓库(本地和远程)：执行过git commit -m的文件，保存在本地仓库，状态为committed
+  2. 暂存区：执行过git add <文件名>的文件进入的区域、状态为staged，被tracked的文件，将要被commit到仓库的文件。  index
+  3. 仓库(本地和远程)：执行过git commit -m的文件，保存在本地仓库，状态为committed。   HEAD
   
   
   
@@ -77,11 +77,12 @@
    - git status 查看状态
    - git init (切换到仓库目录后)初始化仓库
    - git add <file> 添加追踪文件到暂存区
-   - git commit -m '描述信息'   提交修改到本地仓库
-   - git reset HEAD <file> 取消推送文件到本地仓库。但是在工作区还是保留修改的文件
-   - git log 查看所有commit提交信息
+   - git restore --staged <file> 取消文件到暂存区
    - git checkout <file>   撤销没有进暂存区(未git add)的文件的修改（比如对文件修改了代码或者加了一些注释，但发现是没有用的，可以使用这个命令，将暂存区的这个文件覆盖掉工作区的文件，就相当于撤销了工作区文件的修改）
    - git restore <file> 撤销的另一种方式，与上面不同的是，这种方式是直接将你的修改撤销掉，而不是通过暂存区覆盖
+   - git commit -m '描述信息'   提交修改到本地仓库
+   -   git reset HEAD <file> 取消推送文件到本地仓库。但是在工作区还是保留修改的文件
+   - git log 查看所有commit提交信息
    - git branch 查看当前分支
    - git branch a  创建a分支。a分支与主分支一样的内容
    - git checkout a  切换到a分支上。*代表当前所在分支
