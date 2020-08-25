@@ -81,7 +81,7 @@
    - 工作区相关
    
      - ctrl + s 保存修改，将文件保存到工作区。状态为modified
-     - git restore <file> 撤销的另一种方式，与上面不同的是，这种方式是直接将你的修改撤销掉，而不是通过暂存区覆盖。误删除也可通过此恢复、
+     - git restore <file> 撤销的另一种方式，与下面不同的是，这种方式是直接将你的修改撤销掉，而不是通过暂存区覆盖。误删除也可通过此恢复、
      - git checkout <file>   撤销文件的修改(没有进暂存区的文件——未git add的))。本质是将暂存区的这个文件覆盖掉工作区的文件，就相当于撤销了工作区文件的修改。应用场景：比如对文件修改了代码或者加了一些注释，但发现是没有用的，或者误删除工作区文件了，就可以使用这个命令恢复
    
    - 暂存区相关
@@ -93,8 +93,8 @@
    - 本地仓库相关
    
      - git commit -m '描述信息'   提交修改到本地仓库
-     - git reset HEAD~ 使用本地仓库的文件上一次commit的状态覆盖暂存区，注意此时工作区仍是modified状态，即最新修改仍在工作区可视
-     - git reset + ID 使用本地仓库的文件在提交ID的那个状态，覆盖暂存区。注意只是修改了暂存区，如果想同时改变工作区，还应该使用git checkout + 文件名 覆盖工作区。或者，如果想直接使暂存区、工作区回滚到某一ID状态，直接使用 git reset --hard + ID     注意--soft是只改变仓库的HEAD指针
+     - git reset HEAD~ 使用本地仓库的文件上一次commit的状态覆盖暂存区(HEAD指针指向了上一次的快照，即此时仓库快照是上一次提交状态)，注意此时工作区仍是modified状态，即最新修改仍在工作区可视
+     - git reset + ID 使用本地仓库的文件在提交ID的那个状态，覆盖暂存区。注意只是修改了暂存区，如果想同时改变工作区，还应该使用git checkout + 文件名 覆盖工作区。或者，如果想直接使暂存区、工作区回滚到某一ID状态，直接使用 git reset --hard + ID     注意--soft是只改变仓库的HEAD指针。reset可以到任意ID，过去和将来，只要有ID
      - 
    
      - git log 查看所有commit提交信息，以及ID
@@ -188,7 +188,7 @@
 2. 初始化git flow仓库：git flow init
 3. 从远程develop拉最新分支到本地，并基于这个最新分支，在本地新建一个功能分支xxx：git flow feature start xxx
 4. 开发完功能后，将xxx分支合并到本地develop，并删除xxx分支，切换到develop：git flow featrue finish xxx
-5. 推送到远程develop仓库：git push origin develop
+5. 拉推远程develop仓库：git pull/push origin develop
 
 
 
