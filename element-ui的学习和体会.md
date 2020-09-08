@@ -79,6 +79,96 @@ hidden-sm-and-up - 当视口在 sm 及以上尺寸时隐藏
 
 
 
+#### InfiniteScroll 无限滚动
+
+使用时注意，如下，v-infinite-scroll给滚动条目item加，如下面的block元素。这个元素本身或者或者它的父元素比如in2一定要有一个确定的高度，如px或者flex-1，但不能是父flex-1 + 子100%这种（见下一条），同时这个具有高度的元素也要有overflow: auto（不能是overlay）。
+
+```vue
+<style>
+    .t-out {
+      width: 1000px;
+      height: 500px;
+      border: 2px solid red;
+      display: flex;
+      flex-direction: column;
+      .in1{
+        height: 100px;
+        width: 100%;
+        background-color: grey;
+      }
+      .in2{
+        flex: 1;
+        background: yellow;
+        // height: 400px;
+        .block {
+          // height:400px;
+        }
+      }
+}
+</style>
+<div class="t-out">
+      <div class="in1" @mousedown="mousedown" @mouseup="mouseup" @click="mouseclick">
+        qwqwe
+      </div>
+      <div class="in2" style="overflow:auto">
+        <div class="block" v-infinite-scroll="load">
+          <div v-for="i in loadLists" :key="i">
+            {{i}}
+          </div>
+          <span class="demonstration">默认 click 触发子菜单</span>
+          <el-cascader
+            v-model="value"
+            :options="options"></el-cascader>
+            {{value}}
+        </div>
+      </div>
+    </div>
+```
+
+#### 盒模型的高度失控问题
+
+如下是一个典型的flex布局，out是flex固定高度500，in1具有固定高度100px，in2是flex-1那么正常就是400px，block是in2的子元素。
+
+以下几种情况：
+
+1. 如果block的高度超过了400，将会撑大in2，这是没有问题的。
+2. 如果block元素设置了100%，正常block应该就会固定是400px（比如in2设置了固定高度400），但是此时如果block的内容in-block高度超过了400px，那么block的高度还会被撑开。**即flex-1对其后代的100%高度没有约束作用。**
+
+```vue
+<style>
+    .t-out {
+      width: 1000px;
+      height: 500px;
+      border: 2px solid red;
+      display: flex;
+      flex-direction: column;
+      .in1{
+        height: 100px;
+        width: 100%;
+        background-color: grey;
+      }
+      .in2{
+        flex: 1;
+        background: yellow;
+        // height: 400px;
+        .block {
+          height: 100%;
+        }
+      }
+}
+</style>
+<div class="t-out">
+    <div class="in1"></div>
+    <div class="in2">
+        <div class="block">
+            <div class="in-block">
+                
+            </div>
+        </div>
+    </div>
+</div>
+```
+
 
 
 

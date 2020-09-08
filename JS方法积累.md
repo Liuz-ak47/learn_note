@@ -4,8 +4,8 @@
 
 ##### 遍历对象   
 
-```
-*****************注意对象没有for（let i of obj）{}方法  和 obj.forEach()方法****************
+```javascript
+*****************注意对象没有for（let i of obj）{}方法 和 obj.forEach()方法****************
 const obj = {
 	a: 'a',
 	b: 2,
@@ -20,6 +20,23 @@ for(var key in obj){
 	console.log(key)  //'a', 'b', 'c'
 	console.log(obj[key]) //'a', 2, true
 }
+4.
+Object.entries() 方法返回一个给定对象自身可枚举属性的键值对数组，其排列与使用 for...in 循环遍历该对象时返回的顺序一致（区别在于 for-in 循环还会枚举原型链中的属性）。
+例如：
+(1)
+const obj = { foo: 'bar', baz: 42 };
+console.log(Object.entries(obj)); // [ ['foo', 'bar'], ['baz', 42] ]
+(2)
+const anObj = { 100: 'a', 2: 'b', 7: 'c' };
+console.log(Object.entries(anObj)); // [ ['2', 'b'], ['7', 'c'], ['100', 'a'] ]
+(3)
+const object1 = {a: 'somestring', b: 42};
+for (const [key, value] of Object.entries(object1)) {
+  console.log(`${key}: ${value}`);
+}
+// "a: somestring"
+// "b: 42"
+
 ```
 
 #### 数组
@@ -33,6 +50,18 @@ arr.forEach(t => {
 })
 2.map  有返回值
 let newarr = arr.map(t => t*2)  //[2, 4, 6, 8]
+3.every 
+every() 方法使用指定函数检测数组中的所有元素：
+如果数组中检测到有一个元素不满足，则整个表达式返回 false ，且剩余的元素不会再进行检测。
+如果所有元素都满足条件，则返回 true。
+例如：
+var ages = [32, 33, 16, 40];
+function checkAdult(age) {
+    return age >= 18;
+}
+function myFunction() {
+    document.getElementById("demo").innerHTML = ages.every(checkAdult);
+}
 
 遍历数组：
 1.
@@ -52,11 +81,27 @@ arr.concat(arr1, arr2) // 参数也可以是多个数组
 
 截取slice：
 arr.slice(1, 3) // [2, 3]  参数左闭右开，不改变原数组
+
+增删改：
+let arr = ['word', 'dd', 'ddds']; 
+arr.splice(0,1,'aa'); //['word']
+arr // ['aa', 'dd', 'ddds']
+
+
 ```
 
 
 
 #### 字符串
+
+```
+let str = 'abcd'
+
+截取：
+str.slice(1) //'bcd' 不改变原数组，返回截取
+```
+
+
 
 
 
@@ -180,6 +225,12 @@ var main = function(){
 
 return的语句若为逗号，那么这句话都会执行，并以最后那句a=n作为返回值
 ```
+
+
+
+
+
+
 
 
 
