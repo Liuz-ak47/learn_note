@@ -77,6 +77,17 @@ script标签不是作用域的标志，只有{}才是。比如下面
 </script>
 ```
 
+###### Object.assign
+
+方法返回第一个参数即obj1的对象地址
+
+```javascript
+Object.assign(obj1, obj2,...)  
+Object.assign(obj1, obj2,...) == obj1 //true
+```
+
+
+
 
 
 
